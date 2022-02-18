@@ -15,3 +15,31 @@ nav ul li:hover{background-color: #eee;}
 /* index 스타일 */
 section{text-align: center;}
 section h1{font-size: 2em; margin-bottom: 30px;}
+
+/*  memberlist 스타일 */
+section table{width: 600px; margin: 0 auto; border-collapse: collapse;}
+section table, th, td{border: 1px solid #ccc; padding: 10px}
+
+/* member_view 스타일 */
+section .tbl_view{width: 450px;}
+section .tbl_view td{width: 100px;}
+section .tbl_view input{width: 250px; height: 30px;}
+
+/* register 스타일 */
+section .join{width: 500px; margin: 0 auto;}
+section .join fieldset{border-radius: 5px;}
+section .join ul{list-style: none; padding: 10px;}
+section .join ul li{margin: 20px;}
+section .join ul label{width: 120px; float: left; text-align: right}
+section .join ul input[type='text'], [type='password']{width: 250px; height: 30px;}
+section .join ul input[type='submit'],input[type='reset']{width: 100px; height: 30px;}
+
+/*  로그인 스타일  */
+section .login{width: 450px; margin: 0 auto;}
+section .login fieldset{border-radius: 5px;}
+section .login ul{list-style: none; padding: 10px;}
+section .login ul li{margin: 20px;}
+section .login ul label{width: 100px; float: left; text-align: right;}
+section .login ul input{width: 200px; height: 30px;}
+section .login ul input[type='submit']{width: 100px; height: 30px;}
+

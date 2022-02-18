@@ -50,4 +50,3 @@ def select_member():
 # print("접속", conn)
 #create_table()
 #insert_member()
-select_member()

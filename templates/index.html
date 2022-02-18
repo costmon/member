@@ -7,17 +7,7 @@
 </head>
 <body>
     <div id="container">
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원목록</a></li>
-                    <li><a href="#">게시판</a></li>
-
-                </ul>
-            </nav>
-        </header>
+        {% include 'navbar.html' %}
         <section>
             <h1>환영합니다! 회원형 커뮤니티 사이트입니다.</h1>
             <img id="pic" src="{{ url_for('static', filename='coffee-gray.jpg')}}">
