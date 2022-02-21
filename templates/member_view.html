@@ -14,27 +14,31 @@
                  {% if rs %}
                  <tr>
                      <td>아이디</td>
-                     <td><input type="test" name='mid'value="{{ rs[0] }}"></td>
+                     <td><input type="text" name='mid'value="{{ rs[0] }}" readonly></td>
                  </tr>
                  <tr>
                      <td>비밀번호</td>
-                     <td><input type="test" name='passwd' value="{{ rs[1] }}"></td>
+                     <td><input type="password" name='passwd' value="{{ rs[1] }}" readonly></td>
                  </tr>
                  <tr>
                      <td>이름</td>
-                     <td><input type="test" name='name' value="{{ rs[2] }}"></td>
+                     <td><input type="text" name='name' value="{{ rs[2] }}" readonly></td>
                  </tr>
                  <tr>
                      <td>나이</td>
-                     <td><input type="test" name='age' value="{{ rs[3] }}"></td>
+                     <td><input type="text" name='age' value="{{ rs[3] }}" readonly></td>
                  </tr>
                  <tr>
                      <td>가입일</td>
-                     <td><input type="test" name='regDate' value="{{ rs[4] }}"></td>
+                     <td><input type="text" name='regDate' value="{{ rs[4] }}" readonly></td>
                  </tr>
                  <tr>
                      <td colspan="2">
                          <a href="{{url_for('memberlist')}}">목록</a>
+                         {% if session['userID'] == rs[0] %}
+                         <a href="{{url_for('member_del', id = rs[0])}}"
+                            onclick ="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+                         {% endif %}
                      </td>
                  </tr>
                  {% endif %}

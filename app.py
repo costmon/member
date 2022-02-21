@@ -1,10 +1,12 @@
 import sqlite3
 
-from flask import Flask, render_template, request, redirect,url_for
+from flask import Flask, render_template, request, redirect,url_for, session
 
 from tbl_member import select_member
 
 app = Flask(__name__)
+
+app.secret_key = "#abcde!"   #비밀키 설정 필수
 
 # db 점속 함수
 def getconn():
@@ -53,7 +55,7 @@ def register():
         conn = getconn()
         cur = conn.cursor()
         sql = "INSERT INTO member(mid, passwd, name, age) " \
-              "VALUES ('%s', '%s', '%s', '%s')" % (id,pwd,name,age)
+              "VALUES ('%s', '%s', '%s', '%s')" % (id, pwd, name, age)
         cur.execute(sql)
         conn.commit()
         print("회원 추가")
@@ -64,8 +66,44 @@ def register():
         return render_template('register.html')
 
 # 로그인 페이지
-@app.route('/login/')
+@app.route('/login/', methods =['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        # 입력된 id, 비번을 가져오기
+        id = request.form['mid']
+        pwd = request.form['passwd']
+        
+        #db 연동
+        conn = getconn()
+        cur = conn.cursor()
+        sql = "SELECT * FROM member WHERE mid = '%s' AND passwd = '%s'" % (id, pwd)
+        cur.execute(sql)
+        rs = cur.fetchone()
+        if rs:    #rs가 있다면 (일치하면)
+            session['userID'] = rs[0]   #아이디로 세션 발급
+            return redirect(url_for('index'))  # 로그인후 인덱스페이지로 이동
+        else:
+            error = "아이디나 비밀번호를 확인해주세요."
+            return render_template('login.html', error = error)
+        
+    else:
+        return render_template('login.html')
+
+#로그아웃 페이지
+@app.route('/logout/')
+def logout():
+    session.pop("userID")    #세션 삭제
+    return redirect(url_for('index'))
+
+#회원 삭제
+@app.route('/member_del/<string:id>/')
+def member_del(id):
+    conn = getconn()
+    cur = conn.cursor()
+    sql = "DELETE FROM member WHERE mid = '%s'" % (id)
+    cur.execute(sql)
+    conn.commit()
+    conn.close()
+    return redirect(url_for('memberlist'))
 
 app.run(debug=True)
