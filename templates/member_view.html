@@ -11,6 +11,9 @@
          <section>
              <h1>회원 정보</h1>
              <table class="tbl_view">
+                 <colgroup>
+                     <col style="background-color: #eee">
+                 </colgroup>
                  {% if rs %}
                  <tr>
                      <td>아이디</td>
@@ -33,9 +36,10 @@
                      <td><input type="text" name='regDate' value="{{ rs[4] }}" readonly></td>
                  </tr>
                  <tr>
-                     <td colspan="2">
+                     <td colspan="2" style="background-color = #fff">
                          <a href="{{url_for('memberlist')}}">목록</a>
                          {% if session['userID'] == rs[0] %}
+                          <a href="{{url_for('member_edit', id = rs[0])}}">수정</a>
                          <a href="{{url_for('member_del', id = rs[0])}}"
                             onclick ="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
                          {% endif %}
