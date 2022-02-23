@@ -53,12 +53,28 @@ section .tbl_edit input[type="submit"]{width:70px; height: 30px;}
 section .tbl_edit input[type="reset"]{width:70px; height: 30px;}
 
 /* boardlist 스타일 */
-section .btn_write{padding: 10px; text-align: right; margin: 10px 180px;}
-section .btn_write input{width: 100px; height: 30px;}
+section .tbl_board{width: 700px;}
+section .tbl_board th{background: #eee;}
+section .tbl_board a{text-decoration: none; color: #000;}
+section .tbl_board td:nth-child(2){text-align: left; padding-left: 20px;}
+section .btn_write{text-align: right; margin: 20px 150px;}
+section .btn_write input{width: 100px; height: 40px;}
 
 /* board_view 스타일 */
 section .tbl_bo_view{width: 600px;}
 section .tbl_bo_view input{width: 550px; height: 25px;}
 section .tbl_bo_view textarea{width: 550px; height: 300px;}
 
+/* writing 스타일 */
+section .writing{width: 600px; margin: 0 auto;}
+section .writing textarea{width: 550px; height: 300px;}
+section .writing input{width: 550px; height: 25px;}
+section .writing input[type="button"]{width: 80px; height: 30px;}
+section .writing input[type="reset"]{width: 80px; height: 30px;}
 
+/* board_deit 스타일 */
+section .tbl_bo_edit{width: 600px;}
+section .tbl_bo_edit textarea{width: 550px; height: 300px;}
+section .tbl_bo_edit input{width: 550px; height: 25px;}
+section .tbl_bo_edit input[type='submit']{width: 80px; height: 30px;}
+section .tbl_bo_edit input[type='reset']{width: 80px; height: 30px;}

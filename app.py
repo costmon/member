@@ -150,15 +150,75 @@ def boardlist():
     return render_template('boardlist.html', rs = rs)
 
 #게시글 상세 페이지
-@app.route('/board_view/<int:id>/')
-def board_view(id):
+@app.route('/board_view/<int:bno>/')
+def board_view(bno):
     conn = getconn()
     cur = conn.cursor()
-    sql = "SELECT * FROM board WHERE bno = '%s'" % (id)
+    sql = "SELECT * FROM board WHERE bno = '%s'" % (bno)
     cur.execute(sql)
     rs = cur.fetchone()
     conn.close()
     return render_template('board_view.html', rs=rs)
+
+# 게시글 쓰기
+@app.route('/writing/', methods =['GET', 'POST'])
+def writing():
+    if request.method == 'POST':
+        # 데이터를 넘겨 받음
+        title = request.form['title']
+        content = request.form['content']
+        mid = session.get('userID')   # 로그인한 mid(글쓴이)
+
+        #db 연동 처리
+        conn= getconn()
+        cur = conn.cursor()
+        sql = "INSERT INTO board(title, content, mid) " \
+              "VALUES ('%s', '%s', '%s')" % (title, content, mid)
+        cur.execute(sql)
+        conn.commit()
+        conn.close()
+        return redirect(url_for('boardlist'))
+    else:
+        return render_template('writing.html')
+
+# 게시글 삭제
+@app.route('/board_del/<int:bno>')
+def board_del(bno):
+    conn=getconn()
+    cur = conn.cursor()
+    sql = "DELETE FROM board WHERE bno = '%s'" % (bno)
+    cur.execute(sql)
+    conn.commit()
+    conn.close()
+    return redirect(url_for('boardlist'))
+
+# 게시물 수정
+@app.route('/board_edit/<int:bno>/', methods =['GET','POST'])
+def board_edit(bno):
+    if request.method == "POST":
+        # 데이터 전달 받기
+        title = request.form["title"]
+        content = request.form['content']
+        mid = session.get('userID')
+
+        # db 연동
+        conn = getconn()
+        cur = conn.cursor()
+        sql = "UPDATE board SET  title = '%s', content = '%s', mid = '%s' " \
+              "WHERE bno = '%s'" % (title, content, mid, bno)
+        cur.execute(sql)
+        conn.commit()
+        conn.close()
+        return redirect(url_for('board_view', bno = bno))
+
+    else:
+        conn = getconn()
+        cur = conn.cursor()
+        sql = "SELECT * FROM board WHERE bno = '%s'" % (bno)
+        cur.execute(sql)
+        rs = cur.fetchone()
+        conn.close()
+        return render_template('board_edit.html', rs = rs)
 
 
 app.run(debug=True)

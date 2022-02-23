@@ -10,21 +10,22 @@
          {% include 'navbar.html' %}
          <section>
              <h1>게시글 목록</h1>
-             <table>
+             <table class="tbl_board">
                  <tr>
                      <th>글번호</th><th>제목</th><th>작성일</th><th>글쓴이</th>
                  </tr>
                  {% for i in rs %}
                  <tr>
                      <td>{{ i[0] }}</td>
-                     <td><a href="{{url_for('board_view', id=i[0])}}">{{ i[1] }}</a></td>
+                     <td><a href="{{url_for('board_view', bno=i[0])}}">{{ i[1] }}</a></td>
                      <td>{{ i[3] }}</td>
                      <td>{{ i[4] }}</td>
                  </tr>
                  {% endfor %}
              </table>
              <div class="btn_write">
-                 <input type="submit" value="글쓰기">
+<!--                 <input type="button" value="글쓰기" onclick="goLogin()">-->
+                 <a href="{{ url_for('writing') }}">글쓰기</a>
              </div>
          </section>
      </div>

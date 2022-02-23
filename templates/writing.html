@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기 폼</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='checkWriting.js') }}"></script>
+</head>
+<body>
+    <div id="container">
+        {% include 'navbar.html' %}
+        {% if not session['userID'] %}     //로그인 되지 않았다면
+        <script>
+            alert("로그인이 필요합니다");
+            location.href = '/login/';    //url 주소로 이동
+        </script>
+        {% endif %}
+        <section>
+            <h1>글쓰기</h1>
+            <form action="" method="post" class="writing" name="writeForm">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="text" name="title" placeholder="글 제목">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea name="content" placeholder="글 내용"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" value="글쓰기" onclick="checkWriting()">
+<!--                            <input type="submit" value="글쓰기">-->
+                            <input type="reset" value="취소">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
