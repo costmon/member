@@ -39,7 +39,9 @@ def select_board():
     sql = "SELECT * FROM board ORDER BY bno DESC"
     cur.execute(sql)
     rs = cur.fetchall()
-    print(rs)
+    #print(rs)
+    for i in rs:
+        print(i)
     conn.close()
 
 #create_table()

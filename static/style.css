@@ -58,7 +58,7 @@ section .tbl_board th{background: #eee;}
 section .tbl_board a{text-decoration: none; color: #000;}
 section .tbl_board td:nth-child(2){text-align: left; padding-left: 20px;}
 section .btn_write{text-align: right; margin: 20px 150px;}
-section .btn_write input{width: 100px; height: 40px;}
+section .btn_write button{width: 100px; height: 40px;}
 
 /* board_view 스타일 */
 section .tbl_bo_view{width: 600px;}

@@ -24,8 +24,9 @@
                  {% endfor %}
              </table>
              <div class="btn_write">
-<!--                 <input type="button" value="글쓰기" onclick="goLogin()">-->
-                 <a href="{{ url_for('writing') }}">글쓰기</a>
+<!--                  <a href="{{ url_for('writing') }}">글쓰기</a>-->
+                 <button type="button"
+                        onclick="location.href='/writing/'">글쓰기</button>
              </div>
          </section>
      </div>

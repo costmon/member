@@ -1,17 +1,13 @@
 import sqlite3
 
 from flask import Flask, render_template, request, redirect,url_for, session
-
+from model.model_member import getconn
 from tbl_member import select_member
 
 app = Flask(__name__)
 
 app.secret_key = "#abcde!"   #비밀키 설정 필수
 
-# db 점속 함수
-def getconn():
-    conn = sqlite3.connect("./member.db")
-    return conn
 
 # index 페이지
 @app.route('/')
@@ -22,12 +18,7 @@ def index():
 #회원 목록
 @app.route('/memberlist/')
 def memberlist():
-    conn = getconn()
-    cur = conn.cursor()
-    sql = "SELECT * FROM member ORDER BY regDate DESC"
-    cur.execute(sql)
-    rs = cur.fetchall()   # 회원 전체
-    conn.close()
+    rs = select_member()
     return render_template("memberlist.html", rs = rs)
 
 # 회원 상세 페이지
@@ -65,7 +56,8 @@ def register():
         rs = cur.fetchone()
         conn.close()
         if rs:
-            session['userID'] = rs[0]   #회원 가입시 세션 발급
+            session['userID'] = rs[0]   #회원 가입시 세션 발급(아이디)
+            session['userName'] = rs[2]  #회원 가입시 세션 발급(이름)
             return redirect(url_for('memberlist'))
     else:
         return render_template('register.html')
@@ -85,7 +77,8 @@ def login():
         cur.execute(sql)
         rs = cur.fetchone()
         if rs:    #rs가 있다면 (일치하면)
-            session['userID'] = rs[0]   #아이디로 세션 발급
+            session['userID'] = rs[0]   #아이디로 세션 발급(아이디)
+            session['userName'] = rs[2]  # 회원 가입시 세션 발급(이름)
             return redirect(url_for('index'))  # 로그인후 인덱스페이지로 이동
         else:
             error = "아이디나 비밀번호를 확인해주세요."
@@ -97,7 +90,9 @@ def login():
 #로그아웃 페이지
 @app.route('/logout/')
 def logout():
-    session.pop("userID")    #세션 삭제
+    # session.pop("userID")    #세션 삭제
+    # session.pop("userName")
+    session.clear()
     return redirect(url_for('index'))
 
 #회원 삭제
@@ -167,7 +162,7 @@ def writing():
         # 데이터를 넘겨 받음
         title = request.form['title']
         content = request.form['content']
-        mid = session.get('userID')   # 로그인한 mid(글쓴이)
+        mid = session.get('userName')   # 로그인한 mid(글쓴이)
 
         #db 연동 처리
         conn= getconn()
@@ -199,7 +194,7 @@ def board_edit(bno):
         # 데이터 전달 받기
         title = request.form["title"]
         content = request.form['content']
-        mid = session.get('userID')
+        mid = session.get('userName')
 
         # db 연동
         conn = getconn()
