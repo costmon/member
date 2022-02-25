@@ -19,8 +19,6 @@ def select_bo_one(bno):
     sql = "SELECT * FROM board WHERE bno = '%s' " % (bno)
     cur.execute(sql)
     rs = cur.fetchone()
-    conn.close()
-    return rs
 
     #hit 1증가 시켜서 - update set
     hit = rs[4]       # 이전 조회수
