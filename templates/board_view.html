@@ -24,13 +24,13 @@
                  </tr>
                  <tr>
                      <td>
-                         <input type="text" name="mid" value="작성자 : {{ rs[4] }}" readonly>
+                         <input type="text" name="mid" value="작성자 : {{ rs[5] }}" readonly>
                      </td>
                  </tr>
                  <tr>
                      <td>
                          <a href="{{ url_for('boardlist') }}">목록</a>
-                         {% if session['userName'] == rs[4] %}
+                         {% if session['userName'] == rs[5] %}
                          <a href="{{ url_for('board_edit', bno=rs[0]) }}">수정</a>
                          <a href="{{ url_for('board_del', bno=rs[0]) }}"
                             onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>

@@ -16,6 +16,7 @@ def create_table():
             title text NOT NULL,
             content text NOT NULL,
             createDate timestamp date DEFAULT (datetime('now', 'localtime')),
+            hit integer,
             mid char(5) NOT NULL,
             FOREIGN KEY(mid) REFERENCES member(mid) ON DELETE CASCADE
         )
@@ -44,6 +45,6 @@ def select_board():
         print(i)
     conn.close()
 
-#create_table()
+create_table()
 #insert_board()
 #select_board()
