@@ -65,6 +65,8 @@ def login_member():
 def delete_member(id):
     conn = getconn()
     cur = conn.cursor()
+    sql = "PRAGMA foreign_keys = ON"
+    cur.execute(sql)
     sql = "DELETE FROM member WHERE mid = '%s'" % (id)
     cur.execute(sql)
     conn.commit()

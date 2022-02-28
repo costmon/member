@@ -34,7 +34,7 @@ def write_board():
     title = request.form['title']
     content = request.form['content']
     hit = 0
-    mid = session.get('userName')  # 로그인한 mid(글쓴이)
+    mid = session.get('userID')  # 로그인한 mid(글쓴이)
 
     # db 연동 처리
     conn = getconn()

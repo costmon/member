@@ -45,6 +45,6 @@ def select_board():
         print(i)
     conn.close()
 
-create_table()
+#create_table()
 #insert_board()
 #select_board()
