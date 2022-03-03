@@ -72,7 +72,7 @@ section .writing input{width: 550px; height: 25px;}
 section .writing input[type="button"]{width: 80px; height: 30px;}
 section .writing input[type="reset"]{width: 80px; height: 30px;}
 
-/* board_deit 스타일 */
+/* board_edit 스타일 */
 section .tbl_bo_edit{width: 600px;}
 section .tbl_bo_edit textarea{width: 550px; height: 300px;}
 section .tbl_bo_edit input{width: 550px; height: 25px;}

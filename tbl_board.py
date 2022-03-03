@@ -1,7 +1,7 @@
 import sqlite3
 
 def getconn():
-    conn = sqlite3.connect("./member.db")
+    conn = sqlite3.connect("./members.db")
     return conn
 
 # con = getconn()
@@ -18,6 +18,7 @@ def create_table():
             createDate timestamp date DEFAULT (datetime('now', 'localtime')),
             hit integer,
             mid char(5) NOT NULL,
+            name text NOT NULl,
             FOREIGN KEY(mid) REFERENCES member(mid) ON DELETE CASCADE
         )
     """
@@ -25,6 +26,7 @@ def create_table():
     conn.commit()
     print("board 테이블 생성")
     conn.close()
+
 def insert_board():
     conn = getconn()
     cur = conn.cursor()
@@ -40,11 +42,11 @@ def select_board():
     sql = "SELECT * FROM board ORDER BY bno DESC"
     cur.execute(sql)
     rs = cur.fetchall()
-    #print(rs)
+    # print(rs)
     for i in rs:
         print(i)
     conn.close()
 
-#create_table()
+create_table()
 #insert_board()
 #select_board()

@@ -3,41 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 정보</title>
-    <link rel ="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')  }}">
 </head>
 <body>
-     <div id="container">
-         {% include 'navbar.html' %}
-         <section>
-             <h1>게시글 보기</h1>
-             <form action="" method="post">
-                 <table class="tbl_bo_edit">
-                     {% if rs %}
-                     <tr>
+    <div id="container">
+        {% include 'navbar.html' %}
+        <section>
+            <h1>게시글 보기</h1>
+            <form action="" method="post">
+                <table class="tbl_bo_edit">
+                    {% if rs %}
+                    <tr>
                         <td>
                             <input type="text" name="title" value="{{ rs[1] }}">
                         </td>
-                     </tr>
-                     <tr>
-                         <td>
-                             <textarea name="content">{{ rs[2] }}</textarea>
-                         </td>
-                     </tr>
-                     <tr>
-                         <td>
-                             <input type="text" name="mid" value="작성자 : {{ rs[5] }}">
-                         </td>
-                     </tr>
-                     <tr>
-                         <td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="mid"
+                                   value="작성자 : {{ rs[6] }}(작성일 : {{ rs[3] }})" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea name="content">{{ rs[2] }}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <input type="submit" value="저장">
                             <input type="reset" value="취소">
-                         </td>
-                     </tr>
-                     {% endif %}
-                 </table>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
             </form>
-         </section>
-     </div>
+        </section>
+    </div>
 </body>
 </html>
